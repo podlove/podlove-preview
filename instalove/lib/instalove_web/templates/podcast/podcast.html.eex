@@ -15,8 +15,10 @@
       </div>
   </header>
 
-  <%= render "form.html" %>
+  <%= content_tag(:pre, inspect(@feed_url)) %>
+  <%= content_tag(:pre, inspect(@params, pretty: true)) %>
+  <%= content_tag(:pre, inspect(@conn, pretty: true)) %>
 
 </form>
 
-<%= render "_footer.html" %>
+<%= render InstaloveWeb.PageView, "_footer.html" %>

@@ -17,6 +17,7 @@ defmodule InstaloveWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get("/*feed_url", PodcastController, :podcast)
   end
 
   # Other scopes may use custom stacks.
