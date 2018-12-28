@@ -14,7 +14,7 @@ defmodule InstaloveWeb.Router do
   end
 
   scope "/", InstaloveWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through :browser
 
     get "/", PageController, :index
   end
