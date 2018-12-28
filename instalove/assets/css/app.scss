@@ -1,0 +1,25 @@
+/* This file is for your main application css. */
+
+@import "tachyons-sass/tachyons.scss";
+
+.svg-icon {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  top: 9px;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: rgba(0, 0, 0, 0.7);
+}
+
+// .svg-icon circle {
+//   stroke: #4691f6;
+//   stroke-width: 1;
+// }
+
+.copy-btn {
+  cursor: pointer
+}

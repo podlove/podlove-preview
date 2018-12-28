@@ -7,7 +7,7 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :instalove, InstaloveWeb.Endpoint,
-  http: [port: 4000],
+  http: [:inet6, port: 4040],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,

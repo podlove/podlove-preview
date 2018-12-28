@@ -1,35 +1,22 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed and maintainability.</p>
-</section>
+<form class="bg-near-white near-black mw7 center pa4 ma1 ma5-ns mb3 mb3-ns br2-ns ba b--black-10">
+  <header class="dt mw6 center pt0 pv3 pb4-ns">
+      <div class="db dtc-ns v-mid-ns">
+        <img src="/images/podlove-icon.svg" width="50" class="w-100 mw3 w3-ns mr3-ns" />
+      </div>
+      <div class="db dtc-ns v-mid ph2 pr0-ns pl3-ns">
+        <p class="lh-copy">
+          <h2 class="f3 fw7 ttu tracked lh-title mt0 mb2">
+            Show a nice player list for your podcast.
+          </h2>
+          <h3 class="f5 fw4 lh-title mt0">
+            Easily share the Podlove Player interface for listeners to subscribe. Works on every platform: iOS, Android; mobile and desktop.
+          </h3>
+        </p>
+      </div>
+  </header>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
-</section>
+  <%= render "form.html" %>
+
+</form>
+
+<%= render "_footer.html" %>
