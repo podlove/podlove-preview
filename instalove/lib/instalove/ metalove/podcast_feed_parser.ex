@@ -49,7 +49,19 @@ defmodule Instalove.Metalove.PodcastFeedParser do
 
   # fixme: very naive. works with Publisher but must be tolerant of whatever formats
   def date_time(timestring) do
-    timestring
-    |> Timex.parse!("{RFC1123}")
+    trimmed =
+      timestring
+      |> String.trim()
+
+    case Timex.parse(trimmed, "{RFC1123}") do
+      {:ok, result} ->
+        result
+
+      _ ->
+        case Timex.parse(trimmed <> " +0000", "{RFC1123}") do
+          {:ok, result} -> result
+          _ -> nil
+        end
+    end
   end
 end

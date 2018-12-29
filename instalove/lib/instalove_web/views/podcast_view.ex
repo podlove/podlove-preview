@@ -14,7 +14,9 @@ defmodule InstaloveWeb.PodcastView do
       subtitle: #{Jason.encode!(episode.subtitle)},
       audio: [{
           url: #{Jason.encode!(episode.enclosure.url)},
-          mimeType: 'audio/mp4',
+          mimeType: #{
+      Jason.encode!(Instalove.Metalove.PodcastEnclosure.mime_type(episode.enclosure))
+    },
           size: #{Jason.encode!(episode.enclosure.size)},
           title: 'Audio'
         }]
