@@ -5,11 +5,11 @@ defmodule InstaloveWeb.PodcastController do
 
   def podcast(conn, params) do
     "/" <> feed_url = conn.request_path
-    feed = Metalove.Fetcher.fetch(feed_url)
+    podcast = Metalove.Podcast.new(feed_url)
 
     render(conn, "podcast.html",
       feed_url: feed_url,
-      inspect: feed
+      inspect: podcast
     )
   end
 end
