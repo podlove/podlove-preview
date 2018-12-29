@@ -3,5 +3,5 @@ defmodule Instalove.Metalove.PodcastEnclosure do
 
   defstruct url: nil,
             type: nil,
-            length: nil
+            size: nil
 end

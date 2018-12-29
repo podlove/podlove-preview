@@ -13,9 +13,11 @@
     <meta name="msapplication-TileColor" content="#2d89ef">
     <meta name="theme-color" content="#ffffff">
 
+    <script src="//cdn.podlove.org/web-player/embed.js"></script>
+
     <%= render_existing(@view_module, "meta." <> @view_template, assigns) %>
 
-    <title>Podlove | Subscribe</title>
+    <title>Podlove | Instalove</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
   </head>
 

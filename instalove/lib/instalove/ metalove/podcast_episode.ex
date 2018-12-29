@@ -1,4 +1,6 @@
 defmodule Instalove.Metalove.PodcastEpisode do
+  alias Instalove.Metalove.PodcastEnclosure
+
   #   <title>Shake Shake Shake Your Spices</title>
   # <itunes:author>John Doe</itunes:author>
   # <itunes:subtitle>A short primer on table spices</itunes:subtitle>
@@ -22,4 +24,22 @@ defmodule Instalove.Metalove.PodcastEpisode do
             duration: nil,
             enclosure: nil,
             pub_date: nil
+
+  def new(map) when is_map(map) do
+    %__MODULE__{
+      title: map[:title],
+      guid: map[:guid],
+      description: map[:description],
+      duration: map[:duration],
+      summary: map[:itunes_summary],
+      subtitle: map[:itunes_subtitle],
+      enclosure: %PodcastEnclosure{
+        url: map[:enclosure_url],
+        type: map[:enclosure_map],
+        size: map[:enclosure_length]
+      },
+      pub_date: map[:publication_date],
+      image_url: map[:image]
+    }
+  end
 end

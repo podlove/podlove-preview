@@ -1,0 +1,2 @@
+<%= content_tag(:h2, @podcast.title) %>
+<%= img_tag(@podcast.image_url) %>

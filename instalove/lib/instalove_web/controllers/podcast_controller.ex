@@ -7,8 +7,10 @@ defmodule InstaloveWeb.PodcastController do
     "/" <> feed_url = conn.request_path
     podcast = Metalove.Podcast.new(feed_url)
 
+    feed = hd(podcast.feeds)
+
     render(conn, "podcast.html",
-      feed_url: feed_url,
+      podcast: feed,
       inspect: podcast
     )
   end

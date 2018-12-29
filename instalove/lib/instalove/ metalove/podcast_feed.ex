@@ -1,6 +1,7 @@
 defmodule Instalove.Metalove.PodcastFeed do
   alias Instalove.Metalove.Fetcher
   alias Instalove.Metalove.PodcastFeedParser
+  alias Instalove.Metalove.PodcastEpisode
 
   defstruct feed_url: nil,
             title: nil,
@@ -15,12 +16,14 @@ defmodule Instalove.Metalove.PodcastFeed do
             copyright: nil,
             episodes: nil
 
+  def new(feed_url, content \\ nil)
+
   def new(feed_url, nil) do
-    {:ok, body, headers} = Fetcher.fetch(feed_url)
+    {:ok, body, _headers} = Fetcher.fetch(feed_url)
     new(feed_url, body)
   end
 
-  def new(feed_url, content \\ nil) do
+  def new(feed_url, content) do
     %__MODULE__{
       parse_content(content)
       | feed_url: feed_url
@@ -39,7 +42,8 @@ defmodule Instalove.Metalove.PodcastFeed do
       description: cast[:description],
       summary: cast[:itunes_summary],
       subtitle: cast[:itunes_subtitle],
-      image_url: cast[:image]
+      image_url: cast[:image],
+      episodes: Enum.map(episodes, fn episode -> PodcastEpisode.new(episode) end)
     }
   end
 end

@@ -1,22 +1,12 @@
-<form class="bg-near-white near-black mw7 center pa4 ma1 ma5-ns mb3 mb3-ns br2-ns ba b--black-10">
-  <header class="dt mw6 center pt0 pv3 pb4-ns">
-      <div class="db dtc-ns v-mid-ns">
-        <img src="/images/podlove-icon.svg" width="50" class="w-100 mw3 w3-ns mr3-ns" />
-      </div>
-      <div class="db dtc-ns v-mid ph2 pr0-ns pl3-ns">
-        <p class="lh-copy">
-          <h2 class="f3 fw7 ttu tracked lh-title mt0 mb2">
-            Show a nice list of players for your podcast.
-          </h2>
-          <h3 class="f5 fw4 lh-title mt0">
-            Easily share the Podlove Player interface for listeners to subscribe. Works on every platform: iOS, Android; mobile and desktop.
-          </h3>
-        </p>
-      </div>
-  </header>
 
-  <%= content_tag(:pre, inspect(@feed_url)) %>
+<section id="podcast-header">
+  <%= render "_podcast_header.html", podcast: @podcast %>
+</section>
 
-</form>
+<section id="episodes">
+  <%= for episode <- @podcast.episodes do %>
+    <%= render "_podcast_episode_player.html", podcast: @podcast, episode: episode %>
+  <% end %>
+</section>
 
 <%= render InstaloveWeb.PageView, "_footer.html", assigns %>
