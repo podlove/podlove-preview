@@ -16,10 +16,7 @@
   </header>
 
   <%= content_tag(:pre, inspect(@feed_url)) %>
-  <%= content_tag(:pre, inspect(@params, pretty: true)) %>
-  <%= content_tag(:pre, inspect(@conn, pretty: true)) %>
-  <%= content_tag(:pre, inspect(@feed, pretty: true)) %>
 
 </form>
 
-<%= render InstaloveWeb.PageView, "_footer.html" %>
+<%= render InstaloveWeb.PageView, "_footer.html", assigns %>

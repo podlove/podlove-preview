@@ -1,0 +1,2 @@
+defmodule Instalove do
+end

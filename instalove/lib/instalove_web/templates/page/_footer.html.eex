@@ -16,5 +16,12 @@
       <span class="f6 ml2 pr2">Open Source</span>
     </a> -->
 
-  </div>  
+  </div>
+
+  <%= if assigns[:inspect] do %>
+    <div class="raw-debug">
+    <%= content_tag(:style, raw Makeup.stylesheet()) %>
+    <%= raw Makeup.highlight(inspect(@inspect, pretty: true)) %>
+  </div>
+  <% end %>
 </div>
