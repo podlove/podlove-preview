@@ -9,7 +9,7 @@ defmodule InstaloveWeb.PodcastController do
 
     render(conn, "podcast.html",
       feed_url: feed_url,
-      inspect: %{feed: feed, conn: conn, params: params}
+      inspect: feed
     )
   end
 end
