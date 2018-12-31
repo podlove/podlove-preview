@@ -1,5 +1,5 @@
-defmodule Instalove.Metalove.PodcastEpisode do
-  alias Instalove.Metalove.PodcastEnclosure
+defmodule Metalove.PodcastEpisode do
+  alias Metalove.PodcastEnclosure
 
   #   <title>Shake Shake Shake Your Spices</title>
   # <itunes:author>John Doe</itunes:author>

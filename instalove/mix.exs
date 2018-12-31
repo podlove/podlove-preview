@@ -39,10 +39,9 @@ defmodule Instalove.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:httpoison, "~> 1.5.0"},
-      {:sweet_xml, "~> 0.6.5"},
       {:makeup_elixir, "~> 0.11.0"},
-      {:timex, "~> 3.4"}
+      {:timex, "~> 3.4"},
+      {:metalove, path: "../metalove"}
     ]
   end
 end

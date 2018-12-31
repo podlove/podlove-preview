@@ -1,4 +1,4 @@
-defmodule Instalove.Metalove.PodcastFeedParser do
+defmodule Metalove.PodcastFeedParser do
   import SweetXml, except: [parse: 1, parse: 2]
 
   def parse(xml) do

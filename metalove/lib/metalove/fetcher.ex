@@ -1,4 +1,4 @@
-defmodule Instalove.Metalove.Fetcher do
+defmodule Metalove.Fetcher do
   def fetch(url) do
     try do
       case HTTPoison.get(url, headers(), options()) do

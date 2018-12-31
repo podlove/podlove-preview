@@ -1,7 +1,7 @@
-defmodule Instalove.Metalove.PodcastFeed do
-  alias Instalove.Metalove.Fetcher
-  alias Instalove.Metalove.PodcastFeedParser
-  alias Instalove.Metalove.PodcastEpisode
+defmodule Metalove.PodcastFeed do
+  alias Metalove.Fetcher
+  alias Metalove.PodcastFeedParser
+  alias Metalove.PodcastEpisode
 
   defstruct feed_url: nil,
             title: nil,

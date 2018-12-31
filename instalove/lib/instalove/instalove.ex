@@ -1,2 +1,0 @@
-defmodule Instalove do
-end

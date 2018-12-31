@@ -1,7 +1,7 @@
 defmodule InstaloveWeb.PodcastView do
   use InstaloveWeb, :view
 
-  def episode_div_id(%Instalove.Metalove.PodcastEpisode{guid: guid}) do
+  def episode_div_id(%Metalove.PodcastEpisode{guid: guid}) do
     for <<c::utf8 <- guid>>, (c > ?0 and c < ?9) or (c > ?a and c < ?z), into: "_", do: <<c>>
   end
 
@@ -15,7 +15,7 @@ defmodule InstaloveWeb.PodcastView do
       audio: [{
           url: #{Jason.encode!(episode.enclosure.url)},
           mimeType: #{
-      Jason.encode!(Instalove.Metalove.PodcastEnclosure.mime_type(episode.enclosure))
+      Jason.encode!(Metalove.PodcastEnclosure.mime_type(episode.enclosure))
     },
           size: #{Jason.encode!(episode.enclosure.size)},
           title: 'Audio'

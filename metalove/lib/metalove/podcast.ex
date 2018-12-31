@@ -1,6 +1,4 @@
-defmodule Instalove.Metalove.Podcast do
-  alias Instalove.Metalove
-
+defmodule Metalove.Podcast do
   defstruct initial_url: nil,
             feeds: []
 

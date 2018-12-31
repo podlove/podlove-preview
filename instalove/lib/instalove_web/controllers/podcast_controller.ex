@@ -1,8 +1,6 @@
 defmodule InstaloveWeb.PodcastController do
   use InstaloveWeb, :controller
 
-  alias Instalove.Metalove
-
   def podcast(conn, params) do
     "/" <> feed_url = conn.request_path
     podcast = Metalove.Podcast.new(feed_url)
