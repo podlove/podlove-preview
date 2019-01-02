@@ -1,0 +1,12 @@
+
+<section id="podcast-header">
+  <%= render "_podcast_header.html", podcast: @podcast %>
+</section>
+
+<section id="episodes">
+  <%= for episode <- @podcast.episodes do %>
+    <%= render "_podcast_episode_player.html", podcast: @podcast, episode: episode %>
+  <% end %>
+</section>
+
+<%= render PreviewWeb.PageView, "_footer.html", assigns %>
