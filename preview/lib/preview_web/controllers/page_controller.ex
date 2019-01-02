@@ -1,6 +1,8 @@
 defmodule PreviewWeb.PageController do
   use PreviewWeb, :controller
 
+  require Logger
+
   def index(conn, %{"feed_url" => feed_url}) do
     case Metalove.get_feed_url(feed_url) do
       {:ok, url} ->
@@ -12,6 +14,7 @@ defmodule PreviewWeb.PageController do
   end
 
   def index(conn, _params) do
+    Logger.debug("#{inspect(conn, pretty: true)}")
     render(conn, "index.html")
   end
 end
