@@ -1,3 +1,1 @@
-<%= content_tag(:h2, @episode.title) %>
-<%= content_tag(:p, @episode.summary) %>
-<%= player_div(@episode) %>
+<%= player_div(@podcast, @episode) %>

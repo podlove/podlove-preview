@@ -3,19 +3,24 @@ defmodule PreviewWeb.PodcastController do
 
   def podcast(conn, _params) do
     "/" <> feed_url = conn.request_path
-    podcast = Metalove.get_podcast(feed_url)
 
-    feed = Metalove.PodcastFeed.get_by_feed_url(podcast.main_feed_url)
+    case Metalove.get_podcast(feed_url) do
+      nil ->
+        redirect(conn, to: Routes.page_path(conn, :index, feed_url: feed_url))
 
-    episodes =
-      feed.episodes
-      |> Enum.map(&Metalove.Episode.get_by_episode_id/1)
+      podcast ->
+        feed = Metalove.PodcastFeed.get_by_feed_url(podcast.main_feed_url)
 
-    render(conn, "podcast.html",
-      podcast: feed,
-      episodes: episodes,
-      inspect: %{feed: feed, podcast: podcast}
-    )
+        episodes =
+          feed.episodes
+          |> Enum.map(&Metalove.Episode.get_by_episode_id/1)
+
+        render(conn, "podcast.html",
+          podcast: feed,
+          episodes: episodes,
+          inspect: %{feed: feed, podcast: podcast}
+        )
+    end
   end
 
   require Logger
