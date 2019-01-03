@@ -15,7 +15,7 @@
       </div>
   </header>
 
-  <%= render "form.html" %>
+  <%= render "form.html", assigns %>
 
 </form>
 

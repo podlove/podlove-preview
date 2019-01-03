@@ -23,4 +23,11 @@ defmodule PreviewWeb.PodcastView do
 
     [tag(:div, id: div_id), content_tag(:script, raw("podlovePlayer('##{div_id}', #{config})"))]
   end
+
+  def render("playerdata.json", %{feed: feed, episode: episode}) do
+    %{
+      feed: feed,
+      episode: episode
+    }
+  end
 end

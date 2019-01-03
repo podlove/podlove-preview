@@ -17,6 +17,7 @@ defmodule PreviewWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/playerdata.json", PodcastController, :playerdata
     get("/*feed_url", PodcastController, :podcast)
   end
 

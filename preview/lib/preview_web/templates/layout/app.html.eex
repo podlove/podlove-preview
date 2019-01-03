@@ -23,10 +23,12 @@
 
   <body class="sans-serif bg-white">
 
-    <!--
-    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-    -->
+    <%= if get_flash(@conn, :info) do %>
+    <p class="alert alert-info hide-me" role="alert"><%= get_flash(@conn, :info) %></p>
+    <%= end %>
+    <%= if get_flash(@conn, :error) do %>
+    <p class="alert alert-danger hide-me" role="alert"><%= get_flash(@conn, :error) %></p>
+    <%= end %>
 
     <main role="main">
       <%= render @view_module, @view_template, assigns %>

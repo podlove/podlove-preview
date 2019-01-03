@@ -43,3 +43,52 @@ section {
 section#podcast-header img {
   width: 100pt;
 }
+
+
+p.alert {
+  display: block;
+  border: 4pt solid rgb(226, 213, 29);
+  padding: 10pt;
+  border-radius: 5pt;
+  margin: 20pt;
+  color: rgb(158, 158, 4);
+  background: rgb(255, 255, 134);
+}
+
+p.alert-danger {
+  border-color: red;
+  color: rgb(117, 0, 0);
+  background: rgb(255, 129, 129);
+}
+
+.hide-me {
+  -moz-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Firefox */
+  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Safari and Chrome */
+  -o-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Opera */
+  animation: cssAnimation 0s ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+@keyframes cssAnimation {
+  to {
+      width:0;
+      height:0;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+      border: none;
+  }
+}
+@-webkit-keyframes cssAnimation {
+  to {
+      width:0;
+      height:0;
+      visibility:hidden;
+      padding: 0;
+      margin: 0;
+      border: none;
+  }
+}

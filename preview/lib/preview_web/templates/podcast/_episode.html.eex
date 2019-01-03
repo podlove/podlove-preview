@@ -1,0 +1,2 @@
+<%= content_tag(:h2, @episode.title) %>
+<%= content_tag(:p, @episode.summary) %>
