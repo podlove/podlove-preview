@@ -7,7 +7,7 @@ defmodule PreviewWeb.PodcastView do
 
   def player_data_url(episode) do
     %URI{
-      path: "./playerdata.json",
+      path: "/playerdata.json",
       query: URI.encode_query(%{feed: episode.feed_url, guid: episode.guid})
     }
     |> to_string()
@@ -20,7 +20,24 @@ defmodule PreviewWeb.PodcastView do
 
     [
       tag(:div, id: div_id),
-      content_tag(:script, raw("podlovePlayer('##{div_id}', #{config})"))
+      content_tag(
+        :script,
+        raw("""
+        podlovePlayer('##{div_id}', #{config}).then(function(store) {                               podlovePreview.Player.store = store
+           podlovePreview.Player.domNode = document.getElementById('#{div_id}')
+        })
+        """)
+      )
+    ]
+  end
+
+  def onclick_playerchange(episode) do
+    "podlovePreview.Player.configure_by_jsonurl('#{player_data_url(episode)}'); podlovePreview.Player.domNode.scrollIntoView(); return false;"
+  end
+
+  def play_button(episode) do
+    [
+      content_tag(:span, "Play", onclick: onclick_playerchange(episode))
     ]
   end
 

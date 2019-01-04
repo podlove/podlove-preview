@@ -15,3 +15,26 @@ import "phoenix_html"
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+
+export var Player = {
+    domNode: null,
+    store: null,
+    configure_by_jsonurl: function (url) {
+        fetch(url)
+            .then(res => res.json())
+            .then((out) => {
+                console.log('Checkout this JSON! ', out)
+                // make sure we are paused
+                this.store.dispatch({ "type": "UI_PAUSE", "payload": {} })
+
+                // reinit
+                this.store.dispatch({ type: 'INIT', payload: out })
+
+                // to zero
+                this.store.dispatch({ "type": "UPDATE_PLAYTIME", "payload": 0 })
+            })
+            .catch(err => { throw err });
+    }
+}
+

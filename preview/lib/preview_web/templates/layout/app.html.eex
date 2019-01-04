@@ -14,6 +14,7 @@
     <meta name="theme-color" content="#ffffff">
 
     <script src="//cdn.podlove.org/web-player/embed.js"></script>
+    <script src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
 
     <%= render_existing(@view_module, "meta." <> @view_template, assigns) %>
 
