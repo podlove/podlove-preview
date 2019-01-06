@@ -14,30 +14,17 @@ defmodule PreviewWeb.PodcastView do
   end
 
   def player_div(feed, episode) do
-    div_id = episode_div_id(episode)
-
     config = Jason.encode!(render("playerdata.json", feed: feed, episode: episode))
 
-    [
-      tag(:div, id: div_id),
-      content_tag(
-        :script,
-        raw("""
-        podlovePlayer('##{div_id}', #{config}).then(function(store) {                               podlovePreview.Player.store = store
-           podlovePreview.Player.domNode = document.getElementById('#{div_id}')
-        })
-        """)
-      )
-    ]
-  end
-
-  def onclick_playerchange(episode) do
-    "podlovePreview.Player.configure_by_jsonurl('#{player_data_url(episode)}'); podlovePreview.Player.domNode.scrollIntoView(); return false;"
+    content_tag(:div, "", id: "player_wrapper", "data-config": config)
   end
 
   def play_button(episode) do
     [
-      content_tag(:span, "Play", onclick: onclick_playerchange(episode))
+      content_tag(:button, "Play",
+        class: "start-player-btn",
+        "data-config-url": player_data_url(episode)
+      )
     ]
   end
 

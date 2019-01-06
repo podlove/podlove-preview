@@ -1,4 +1,4 @@
-<%= content_tag(:div, onclick: onclick_playerchange(@episode)) do %>
+<%= content_tag(:div) do %>
     <%= content_tag(:h2, @episode.title) %>
     <%= content_tag(:p, @episode.summary) %>
     <%= play_button(@episode) %>
