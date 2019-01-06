@@ -74,7 +74,9 @@ const init_clickables = function () {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function (_event) {
-    init_player("player_wrapper");
-    init_clickables();
-});
+if (document.getElementById("player_wrapper")) {
+    document.addEventListener("DOMContentLoaded", function (_event) {
+        init_player("player_wrapper");
+        init_clickables();
+    });
+}
