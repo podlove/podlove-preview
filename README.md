@@ -9,6 +9,7 @@ Podlove preview consists of 2 mix projects:
 
 To start your Phoenix server:
 
+  1. Go to the [`preview`][preview] directory `cd preview`
   1. Install Elixir dependencies with `mix deps.get`
   1. Install Node.js dependencies with `cd assets && npm install`
   1. Start server by `mix phx.server` or `iex -S mix phx.server` interactively
