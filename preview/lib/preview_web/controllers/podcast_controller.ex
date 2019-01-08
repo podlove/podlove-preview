@@ -2,7 +2,7 @@ defmodule PreviewWeb.PodcastController do
   use PreviewWeb, :controller
 
   def podcast(conn, _params) do
-    "/" <> feed_url = conn.request_path
+    "/podcast/" <> feed_url = conn.request_path
 
     case Metalove.get_podcast(feed_url) do
       nil ->
@@ -26,7 +26,7 @@ defmodule PreviewWeb.PodcastController do
   require Logger
 
   def playerdata(conn, %{"feed" => feed_url, "guid" => episode_guid}) do
-    Logger.info("feed: #{feed_url} guid: #{episode_guid}")
+    Logger.debug("feed: #{feed_url} guid: #{episode_guid}")
 
     {episode, feed_url} =
       case Metalove.Episode.get_by_episode_id({:episode, feed_url, episode_guid}) do

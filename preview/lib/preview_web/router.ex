@@ -18,7 +18,7 @@ defmodule PreviewWeb.Router do
 
     get "/", PageController, :index
     get "/playerdata.json", PodcastController, :playerdata
-    get("/*feed_url", PodcastController, :podcast)
+    get("/podcast/*feed_url", PodcastController, :podcast)
   end
 
   # Other scopes may use custom stacks.

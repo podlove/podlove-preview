@@ -7,7 +7,7 @@ defmodule PreviewWeb.PageController do
     with {:ok, url} <- validate_url(feed_url),
          {:ok, url} <- Metalove.get_feed_url(url, follow_first: true),
          podcast when not is_nil(podcast) <- Metalove.get_podcast(url) do
-      redirect(conn, to: "/#{podcast.id}")
+      redirect(conn, to: "/podcast/#{podcast.id}")
     else
       _ ->
         conn
