@@ -15,9 +15,12 @@ defmodule PreviewWeb.PodcastController do
           feed.episodes
           |> Enum.map(&Metalove.Episode.get_by_episode_id/1)
 
+        all_enclosures = Metalove.Episode.all_enclosures(hd(episodes))
+
         render(conn, "podcast.html",
           podcast: feed,
           episodes: episodes,
+          all_enclosures: all_enclosures,
           inspect: %{feed: feed, podcast: podcast}
         )
     end
@@ -40,7 +43,9 @@ defmodule PreviewWeb.PodcastController do
 
     feed = Metalove.PodcastFeed.get_by_feed_url(feed_url)
 
+    all_enclosures = Metalove.Episode.all_enclosures(episode)
+
     conn
-    |> render("playerdata.json", feed: feed, episode: episode)
+    |> render("playerdata.json", feed: feed, episode: episode, all_enclosures: all_enclosures)
   end
 end

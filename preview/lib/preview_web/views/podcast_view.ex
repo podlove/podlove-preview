@@ -13,8 +13,11 @@ defmodule PreviewWeb.PodcastView do
     |> to_string()
   end
 
-  def player_div(feed, episode) do
-    config = Jason.encode!(render("playerdata.json", feed: feed, episode: episode))
+  def player_div(feed, episode, all_enclosures) do
+    config =
+      Jason.encode!(
+        render("playerdata.json", feed: feed, episode: episode, all_enclosures: all_enclosures)
+      )
 
     content_tag(:div, "", id: "player_wrapper", "data-config": config)
   end
@@ -28,7 +31,7 @@ defmodule PreviewWeb.PodcastView do
     ]
   end
 
-  def render("playerdata.json", %{feed: feed, episode: episode}) do
+  def render("playerdata.json", %{feed: feed, episode: episode, all_enclosures: all_enclosures}) do
     %{
       show: %{
         title: feed.title,
@@ -41,14 +44,16 @@ defmodule PreviewWeb.PodcastView do
       subtitle: episode.subtitle,
       duration: episode.duration,
       summary: episode.description,
-      audio: [
-        %{
-          url: episode.enclosure.url,
-          mimeType: episode.enclosure.type,
-          size: episode.enclosure.size,
-          title: "Audio #{Path.extname(URI.parse(episode.enclosure.url).path)}"
-        }
-      ],
+      audio:
+        all_enclosures
+        |> Enum.map(fn enclosure ->
+          %{
+            url: enclosure.url,
+            mimeType: enclosure.type,
+            size: enclosure.size,
+            title: "Audio #{Path.extname(URI.parse(enclosure.url).path)}"
+          }
+        end),
       chapters: episode.chapters,
       poster: episode.image_url || feed.image_url,
       contributors: episode.contributors,

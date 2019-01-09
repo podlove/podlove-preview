@@ -4,7 +4,7 @@
 </section>
 
 <section id="podcast-player">
-    <%= render "_podcast_episode_player.html", podcast: @podcast, episode: hd(@episodes) %>
+    <%= render "_podcast_episode_player.html", podcast: @podcast, episode: hd(@episodes) , all_enclosures: @all_enclosures %>
 </section>
 
 <section id="episodes">

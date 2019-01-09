@@ -1,1 +1,1 @@
-<%= player_div(@podcast, @episode) %>
+<%= player_div(@podcast, @episode, @all_enclosures) %>
