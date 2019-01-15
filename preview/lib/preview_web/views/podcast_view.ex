@@ -5,6 +5,19 @@ defmodule PreviewWeb.PodcastView do
     for <<c::utf8 <- guid>>, (c > ?0 and c < ?9) or (c > ?a and c < ?z), into: "_", do: <<c>>
   end
 
+  def player_chapter_image_url(episode, chapter_index) do
+    %URI{
+      path: "/chapter_image",
+      query:
+        URI.encode_query(%{
+          feed: episode.feed_url,
+          guid: episode.guid,
+          chapter_index: chapter_index
+        })
+    }
+    |> to_string()
+  end
+
   def player_data_url(episode) do
     %URI{
       path: "/playerdata.json",
@@ -54,7 +67,7 @@ defmodule PreviewWeb.PodcastView do
             title: "Audio #{Path.extname(URI.parse(enclosure.url).path)}"
           }
         end),
-      chapters: chapters(episode.chapters, episode.enclosure),
+      chapters: chapters(episode.chapters, episode),
       poster: episode.image_url || feed.image_url,
       contributors: episode.contributors,
       link: episode.link,
@@ -66,8 +79,8 @@ defmodule PreviewWeb.PodcastView do
 
   defp chapters([_head | _] = list, _), do: list
 
-  defp chapters(_, %Metalove.Enclosure{} = enclosure) do
-    case enclosure.metadata do
+  defp chapters(_, %Metalove.Episode{} = episode) do
+    case episode.enclosure.metadata do
       nil -> nil
       metadata -> metadata[:chapters]
     end
@@ -76,10 +89,20 @@ defmodule PreviewWeb.PodcastView do
         nil
 
       list ->
-        Enum.map(list, fn entry ->
+        list
+        |> Enum.with_index()
+        |> Enum.map(fn {entry, index} ->
           entry
-          |> Enum.filter(fn {key, _value} -> key in [:title, :href, :start] end)
-          |> Map.new()
+          |> Enum.reduce(
+            %{},
+            fn
+              {key, value}, acc when key in [:title, :href, :start] ->
+                Map.put(acc, key, value)
+
+              {:image, _image_data}, acc ->
+                Map.put(acc, :image_url, player_chapter_image_url(episode, index))
+            end
+          )
         end)
     end
   end
