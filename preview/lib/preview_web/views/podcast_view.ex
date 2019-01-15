@@ -54,12 +54,34 @@ defmodule PreviewWeb.PodcastView do
             title: "Audio #{Path.extname(URI.parse(enclosure.url).path)}"
           }
         end),
-      chapters: episode.chapters,
+      chapters: chapters(episode.chapters, episode.enclosure),
       poster: episode.image_url || feed.image_url,
       contributors: episode.contributors,
       link: episode.link,
       publicationDate: pubdate(episode.pub_date)
     }
+  end
+
+  require Logger
+
+  defp chapters([_head | _] = list, _), do: list
+
+  defp chapters(_, %Metalove.Enclosure{} = enclosure) do
+    case enclosure.metadata do
+      nil -> nil
+      metadata -> metadata[:chapters]
+    end
+    |> case do
+      nil ->
+        nil
+
+      list ->
+        Enum.map(list, fn entry ->
+          entry
+          |> Enum.filter(fn {key, _value} -> key in [:title, :href, :start] end)
+          |> Map.new()
+        end)
+    end
   end
 
   def pubdate(datetime) do
