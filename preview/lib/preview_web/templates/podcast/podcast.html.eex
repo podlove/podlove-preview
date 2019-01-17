@@ -1,15 +1,12 @@
-
-<section id="podcast-header">
-  <%= render "_podcast_header.html", podcast: @podcast %>
-</section>
+<%= render "_podcast_header.html", podcast: @podcast %>
 
 <section id="podcast-player">
     <%= render "_podcast_episode_player.html", podcast: @podcast, episode: hd(@episodes) , all_enclosures: @all_enclosures %>
 </section>
 
 <section id="episodes">
-  <%= for episode <- @episodes do %>
-    <%= render "_episode.html", podcast: @podcast, episode: episode %>
+  <%= for {episode, index} <- Enum.with_index(@episodes) do %>
+    <%= render "_episode.html", podcast: @podcast, episode: episode, index: index %>
   <% end %>
 </section>
 

@@ -1,2 +1,5 @@
-<%= content_tag(:h2, @podcast.title) %>
+<section id="podcast-header">
 <%= img_tag(@podcast.image_url) %>
+<%= content_tag(:h2, @podcast.title) %>
+<%= link(@podcast.link, to: @podcast.link) %>
+</section>

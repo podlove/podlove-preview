@@ -68,7 +68,7 @@ const init_clickables = function () {
 
         btn.addEventListener("click", function (event) {
             Player.configure_by_jsonurl(config_url);
-            Player.domNode.scrollIntoView();
+            window.scrollTo(0, 0);
             event.preventDefault();
         })
     }

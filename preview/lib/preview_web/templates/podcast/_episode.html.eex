@@ -1,5 +1,5 @@
-<%= content_tag(:div) do %>
+<%= content_tag(:div, class: "episode-entry" <> (if rem(@index,2) == 0 do " alt" else "" end) ) do %>
     <%= content_tag(:h2, @episode.title) %>
-    <%= content_tag(:p, @episode.summary) %>
-    <%= play_button(@episode) %>
+    <%= episode_cover_as_play_button(@episode) %>
+    <%= content_tag(:div, (@episode.summary || raw @episode.description || raw @episode.content_encoded), class: "episode-summary") %>
 <% end %>

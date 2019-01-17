@@ -7,12 +7,24 @@ defmodule PreviewWeb.PodcastView do
 
   def player_chapter_image_url(episode, chapter_index) do
     %URI{
-      path: "/chapter_image",
+      path: "/assets/chapter_image",
       query:
         URI.encode_query(%{
           feed: episode.feed_url,
           guid: episode.guid,
           chapter_index: chapter_index
+        })
+    }
+    |> to_string()
+  end
+
+  def player_episode_image_url(episode) do
+    %URI{
+      path: "/assets/episode_image",
+      query:
+        URI.encode_query(%{
+          feed: episode.feed_url,
+          guid: episode.guid
         })
     }
     |> to_string()
@@ -38,6 +50,16 @@ defmodule PreviewWeb.PodcastView do
   def play_button(episode) do
     [
       content_tag(:button, "Play",
+        class: "start-player-btn",
+        "data-config-url": player_data_url(episode)
+      )
+    ]
+  end
+
+  def episode_cover_as_play_button(episode) do
+    [
+      img_tag(player_episode_image_url(episode),
+        alt: episode.title,
         class: "start-player-btn",
         "data-config-url": player_data_url(episode)
       )
