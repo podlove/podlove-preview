@@ -88,7 +88,7 @@ defmodule PreviewWeb.PodcastController do
       end
 
     case episode.enclosure.metadata[:cover_art] do
-      image when is_map(image) and false ->
+      image when is_map(image) ->
         Logger.info("Chapter image: #{inspect(image, pretty: true)}")
 
         conn
@@ -97,7 +97,8 @@ defmodule PreviewWeb.PodcastController do
 
       _ ->
         redirect_url =
-          episode.image_url || Metalove.PodcastFeed.get_by_feed_url(episode.feed_url).image_url
+          episode.image_url || Metalove.PodcastFeed.get_by_feed_url(episode.feed_url).image_url ||
+            Routes.static_path(conn, "/images/default-cover-template.svg")
 
         conn
         |> put_status(:temporary_redirect)
