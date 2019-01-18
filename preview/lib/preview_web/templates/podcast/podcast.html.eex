@@ -1,13 +1,20 @@
-<%= render "_podcast_header.html", podcast: @podcast %>
+<div class="container mx-auto max-w-sm my-8 flex items-center justify-center content-center">
+    <img src="/images/podlove-icon.svg" class="w-8 mr-4"/>
+    <span class="font-bold font-sans text-xl uppercase tracking-wide">Podlove Preview</span>
+</div>
 
-<section id="podcast-player">
-    <%= render "_podcast_episode_player.html", podcast: @podcast, episode: hd(@episodes) , all_enclosures: @all_enclosures %>
-</section>
+<div class="container mx-auto max-w-sm mb-12 pt-4 shadow-md font-sans bg-white">
 
-<section id="episodes">
-  <%= for {episode, index} <- Enum.with_index(@episodes) do %>
-    <%= render "_episode.html", podcast: @podcast, episode: episode, index: index %>
+  <%= render "_podcast_header.html", podcast: @podcast %>
+  
+  <%= for episode <- @episodes do %>
+    <%= render "_episode.html", podcast: @podcast, episode: episode %>
   <% end %>
-</section>
+
+</div>
+
+<div class="fixed pin-b w-full mx-auto" style="margin-bottom: -48px">
+  <%= render "_podcast_episode_player.html", podcast: @podcast, episode: hd(@episodes) , all_enclosures: @all_enclosures %>
+</div>
 
 <%= render PreviewWeb.PageView, "_footer.html", assigns %>

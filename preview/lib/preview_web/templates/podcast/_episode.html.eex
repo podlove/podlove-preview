@@ -1,5 +1,22 @@
-<%= content_tag(:div, class: "episode-entry" <> (if rem(@index,2) == 0 do " alt" else "" end) ) do %>
-    <%= content_tag(:h2, @episode.title) %>
-    <%= episode_cover_as_play_button(@episode) %>
-    <%= content_tag(:div, (@episode.summary || raw @episode.description || raw @episode.content_encoded), class: "episode-summary") %>
-<% end %>
+<div class="flex text-sm px-4 py-4 hover:bg-grey-lighter">
+  <div class="flex-no-shrink w-24 mr-4">
+    <%= img_tag(@episode.image_url, class: "w-24") %>
+  </div>
+  <div class="mr-4">
+    <h2 class="text-sm mb-2"><%= @episode.title %></h2>
+    <div class="text-grey-dark h-12 overflow-hidden mb-2">
+      <%= if @episode.subtitle do %>
+        <%= @episode.subtitle %>
+      <% else %>
+        <%= @episode.summary %>
+      <% end %>
+    </div>
+    <div>
+      <%= DateTime.to_date(@episode.pub_date) %>
+      <%= play_button(@episode) %>
+    </div>
+  </div>
+  <div class="text-sm font-mono">
+    <%= format_duration(@episode.duration) %>
+  </div>
+</div>
