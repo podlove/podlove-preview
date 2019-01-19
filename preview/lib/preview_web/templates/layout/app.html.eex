@@ -22,13 +22,18 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>">
   </head>
 
-  <body class="sans-serif bg-white">
+  <body class="sans-serif bg-grey-lightest">
 
     <%= if get_flash(@conn, :info) do %>
-    <p class="alert alert-info hide-me" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-info" role="alert">
+      <%= get_flash(@conn, :info) %>
+    </p>
     <%= end %>
     <%= if get_flash(@conn, :error) do %>
-    <p class="alert alert-danger hide-me" role="alert"><%= get_flash(@conn, :error) %></p>
+    <div class="alert alert-danger" role="alert">
+      <h2>Error</h2>
+      <span><%= get_flash(@conn, :error) %></span>
+    </div>
     <%= end %>
 
     <main role="main">

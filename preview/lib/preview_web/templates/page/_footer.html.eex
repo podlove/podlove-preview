@@ -1,20 +1,10 @@
-<div class="mt6 center">
-  <div class="bg-white pt1 lh-copy f6 flex justify-center pv4">
+<div class="my-16 w-full">
+  <div class="flex justify-center">
     
-    <a class="no-underline near-black bg-animate inline-flex items-center ph3" href="/" title="Podlove">
-      <img src="/images/podlove-icon.svg" class="h2 w2"/>
-      <span class="f6 ml1 pr2">Get your Podcast Preview Site</span>
+    <a class="flex content-center no-underline text-black hover:underline" href="https://podlove.org" target="_blank" title="Podlove">
+      <img src="/images/podlove-icon.svg" class="h-8 w-8 mr-2"/>
+      <span class="self-center">Powered by Podlove</span>
     </a>
-    
-    <a class="no-underline near-black bg-animate inline-flex items-center ph3" href="https://podlove.org" target="_blank" title="Podlove">
-      <img src="/images/podlove-icon.svg" class=" h2 w2"/>
-      <span class="f6 ml1 pr2">Powered by Podlove</span>
-    </a>
-    
-<!--   <a class="no-underline near-black bg-animate inline-flex items-center ph3" href="https://github.com/podlove/preview" title="Code on GitHub">
-      <img src="/images/GitHub-Mark-64px.png" class=" h2 w2"/>
-      <span class="f6 ml2 pr2">Open Source</span>
-    </a> -->
 
   </div>
 

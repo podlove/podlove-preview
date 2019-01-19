@@ -93,7 +93,20 @@ defmodule PreviewWeb.PodcastView do
       poster: episode.image_url || feed.image_url,
       contributors: episode.contributors,
       link: episode.link,
-      publicationDate: pubdate(episode.pub_date)
+      publicationDate: pubdate(episode.pub_date),
+      visibleComponents: [
+        # "tabInfo",
+        # "tabChapters",
+        # "tabDownload",
+        # "tabAudio",
+        # "tabShare",
+        # "poster",
+        "episodeTitle",
+        # "subtitle",
+        "progressbar",
+        "controlSteppers",
+        "controlChapters"
+      ]
     }
   end
 
@@ -131,5 +144,19 @@ defmodule PreviewWeb.PodcastView do
 
   def pubdate(datetime) do
     Timex.format!(datetime, "%FT%T%:z", :strftime)
+  end
+
+  def format_duration(
+        <<hours::binary-size(2), ":", minutes::binary-size(2), ":", seconds::binary-size(2)>>
+      ) do
+    with {h, ""} <- Integer.parse(hours),
+         {m, ""} <- Integer.parse(minutes),
+         {s, ""} <- Integer.parse(seconds) do
+      "#{h}h#{String.pad_leading(to_string(m), 2, "0")}"
+    end
+  end
+
+  def format_duration(duration) do
+    duration
   end
 end
