@@ -1,6 +1,6 @@
 <div class="flex text-sm px-4 py-4 hover:bg-grey-lighter">
   <div class="flex-no-shrink w-24 mr-4">
-    <%= img_tag(@episode.image_url, class: "w-24") %>
+    <%= img_tag(episode_image_url(@episode, resolved: true), class: "w-24") %>
   </div>
   <div class="mr-4">
     <h2 class="text-sm mb-2"><%= @episode.title %></h2>

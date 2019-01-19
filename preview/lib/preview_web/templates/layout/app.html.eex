@@ -28,13 +28,13 @@
     <p class="alert alert-info" role="alert">
       <%= get_flash(@conn, :info) %>
     </p>
-    <%= end %>
+    <% end %>
     <%= if get_flash(@conn, :error) do %>
     <div class="alert alert-danger" role="alert">
       <h2>Error</h2>
       <span><%= get_flash(@conn, :error) %></span>
     </div>
-    <%= end %>
+    <% end %>
 
     <main role="main">
       <%= render @view_module, @view_template, assigns %>

@@ -87,22 +87,23 @@ defmodule PreviewWeb.PodcastController do
           episode
       end
 
-    case episode.enclosure.metadata[:cover_art] do
-      image when is_map(image) ->
+    case Metalove.Episode.episode_image(episode) do
+      {:image, image} ->
         Logger.info("Chapter image: #{inspect(image, pretty: true)}")
 
         conn
         |> put_resp_content_type(image[:type])
         |> send_resp(:ok, image[:data])
 
-      _ ->
-        redirect_url =
-          episode.image_url || Metalove.PodcastFeed.get_by_feed_url(episode.feed_url).image_url ||
-            Routes.static_path(conn, "/images/default-cover-template.svg")
-
+      {:image_url, url} ->
         conn
         |> put_status(:temporary_redirect)
-        |> redirect(external: redirect_url)
+        |> redirect(external: url)
+
+      :not_found ->
+        conn
+        |> put_status(:temporary_redirect)
+        |> redirect(to: Routes.static_path(conn, "/images/default-cover-template.svg"))
     end
   end
 end

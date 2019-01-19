@@ -5,7 +5,7 @@ defmodule PreviewWeb.PodcastView do
     for <<c::utf8 <- guid>>, (c > ?0 and c < ?9) or (c > ?a and c < ?z), into: "_", do: <<c>>
   end
 
-  def player_chapter_image_url(episode, chapter_index) do
+  def chapter_image_url(episode, chapter_index) do
     %URI{
       path: "/assets/chapter_image",
       query:
@@ -18,7 +18,17 @@ defmodule PreviewWeb.PodcastView do
     |> to_string()
   end
 
-  def player_episode_image_url(episode) do
+  @doc ~S"""
+    Generates an URL to the given episode cover art
+
+    ## Options
+
+    * `:resolved` - if true will return the resolved link to the most appropriate image, otherwise will return the link that will be resolved and temporary redirect on call
+
+  """
+  def episode_image_url(episode, opts \\ [])
+
+  def episode_image_url(episode, []) do
     %URI{
       path: "/assets/episode_image",
       query:
@@ -28,6 +38,25 @@ defmodule PreviewWeb.PodcastView do
         })
     }
     |> to_string()
+  end
+
+  def episode_image_url(episode, opts) when is_list(opts) do
+    {resolved, _opts} = Keyword.pop(opts, :resolved, false)
+
+    if resolved do
+      case Metalove.Episode.episode_image(episode) do
+        {:image, _image} ->
+          episode_image_url(episode, [])
+
+        {:image_url, url} ->
+          url
+
+        :not_found ->
+          "/images/default-cover-template.svg"
+      end
+    else
+      episode_image_url(episode, [])
+    end
   end
 
   def player_data_url(episode) do
@@ -58,7 +87,7 @@ defmodule PreviewWeb.PodcastView do
 
   def episode_cover_as_play_button(episode) do
     [
-      img_tag(player_episode_image_url(episode),
+      img_tag(episode_image_url(episode),
         alt: episode.title,
         class: "start-player-btn",
         "data-config-url": player_data_url(episode)
@@ -135,7 +164,7 @@ defmodule PreviewWeb.PodcastView do
                 Map.put(acc, key, value)
 
               {:image, _image_data}, acc ->
-                Map.put(acc, :image_url, player_chapter_image_url(episode, index))
+                Map.put(acc, :image_url, chapter_image_url(episode, index))
             end
           )
         end)
@@ -151,7 +180,7 @@ defmodule PreviewWeb.PodcastView do
       ) do
     with {h, ""} <- Integer.parse(hours),
          {m, ""} <- Integer.parse(minutes),
-         {s, ""} <- Integer.parse(seconds) do
+         {_s, ""} <- Integer.parse(seconds) do
       "#{h}h#{String.pad_leading(to_string(m), 2, "0")}"
     end
   end
